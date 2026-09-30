@@ -41,8 +41,8 @@ Implement the landing locally in this repository, create a git repo and a featur
 - [x] T1 Scaffold Astro project, design tokens, self-hosted fonts, base layout. Route: delegated (writer, multiple files).
 - [x] T2 Portada: nav, hero, footer. Route: delegated. Commit d143594.
 - [x] T3 Servicios and Urgencias sections. Route: delegated. Commit a133de6.
-- [ ] T4 Proceso, Obras, Garantía and FAQ sections. Route: delegated.
-- [ ] T5 Contacto por pasos: 3-step form, WhatsApp message builder. Route: delegated.
+- [x] T4 Proceso, Obras, Garantía and FAQ sections. Route: delegated. Commit 968f052.
+- [x] T5 Contacto por pasos: 3-step form, WhatsApp message builder. Route: delegated. Commit 083c1b2.
 - [ ] T6 SEO (meta, JSON-LD LocalBusiness, sitemap, robots), accessibility and performance pass. Route: delegated.
 - [ ] T7 README with pending client data checklist and hosting requirements; final build check. Route: inline.
 
@@ -64,5 +64,7 @@ T1: `npm install` ok (0 vulnerabilities); `npm run build` ok (1 page built, re-r
 
 T2: `npm run build` ok (writer). T3: `npm run build` ok; built HTML contains "Un vidrio roto no espera", `[POR CONFIRMAR]` and all 19 service names plus 4 group titles (writer); parent re-ran build ok and confirmed the urgencies headline in `dist/index.html`. Contrast ratios computed by hand (not tool-checked). Layout not yet checked in a browser at 360px.
 
+T4: `npm run build` ok; built HTML contains the four section headlines, `[GARANTÍA PENDIENTE` and 5 `<details` (writer). T5: `npm run test` 8 pass / 0 fail and `npm run build` ok (parent re-ran both); built HTML has "Tres pasos, cero vueltas", `[CORREO PENDIENTE`, no file input. NOT yet verified: wizard DOM behavior in a browser and layout at 360px and 1440px (T6 must cover it).
+
 ## Next step
-T4 Proceso, Obras, Garantía and FAQ; then T5 contact form.
+T6 SEO, accessibility and performance pass, including a real-browser smoke test of the wizard and layout at 360px and 1440px.
