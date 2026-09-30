@@ -49,6 +49,7 @@ const jsonLd = buildLocalBusiness({
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0E0F10" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <!-- TODO: replace with the real favicon once the client provides a logo -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <!-- Only the two critical faces are preloaded (body text and hero headline). -->
