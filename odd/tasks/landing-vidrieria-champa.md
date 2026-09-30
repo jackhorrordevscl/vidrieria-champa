@@ -38,7 +38,7 @@ Native review (RDD): off (decided by global switch), so no review preflight runs
 Implement the landing locally in this repository, create a git repo and a feature branch, and commit per task. Nothing outside this folder. No push, no deploy, no purchases.
 
 ## Tasks
-- [ ] T1 Scaffold Astro project, design tokens, self-hosted fonts, base layout. Route: delegated (writer, multiple files).
+- [x] T1 Scaffold Astro project, design tokens, self-hosted fonts, base layout. Route: delegated (writer, multiple files).
 - [ ] T2 Portada: nav, hero, footer. Route: delegated.
 - [ ] T3 Servicios and Urgencias sections. Route: delegated.
 - [ ] T4 Proceso, Obras, Garantía and FAQ sections. Route: delegated.
@@ -57,10 +57,10 @@ Implement the landing locally in this repository, create a git repo and a featur
 Writer trigger fires on every task except T7 (2+ non-trivial files). Route per task recorded above.
 
 ## Progress
-Repo initialized on `main`; feature branch and T1 pending.
+T1 done (commit 36e7e95). Remote `origin` added (no push yet). Next: T2.
 
 ## Verification evidence
-(none yet)
+T1: `npm install` ok (0 vulnerabilities); `npm run build` ok (1 page built, re-run by parent); `dist/index.html` exists; no fonts.googleapis.com references in dist. Commit 36e7e95. Route: delegated writer. Note: T1 commit accidentally included `.atl/`; untracked and gitignored in the follow-up chore commit.
 
 ## Next step
-Create branch `feat/landing`, then T1.
+T2 Portada: nav, hero, footer.
