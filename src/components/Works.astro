@@ -1,0 +1,183 @@
+---
+import { works, placeholderPaths } from '../data/works';
+
+const sheetRows = [
+  { key: 'job', label: 'Trabajo' },
+  { key: 'place', label: 'Lugar' },
+  { key: 'material', label: 'Material' },
+] as const;
+---
+
+<section id="obras" class="works" aria-labelledby="obras-title">
+  <div class="container">
+    <div class="works__head">
+      <div class="works__titles">
+        <p class="eyebrow">04 — Obras</p>
+        <h2 id="obras-title" class="section-title">Obras reales, no fotos de catálogo.</h2>
+      </div>
+      <p class="works__intro">Cada obra tiene su ficha: qué se hizo, dónde y con qué material.</p>
+    </div>
+
+    <ul class="works__grid">
+      {works.map((w, i) => (
+        <li class="work">
+          <div class="work__frame">
+            {w.photo ? (
+              <img src={w.photo} alt={w.photoAlt ?? ''} loading="lazy" class="work__photo" />
+            ) : (
+              <>
+                <svg class="work__lines" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+                  {placeholderPaths[i % placeholderPaths.length].map((d) => <path d={d} />)}
+                </svg>
+                <span class="work__marker tag-pending">[FOTO OBRA · ANTES / DESPUÉS]</span>
+              </>
+            )}
+            <span class="work__code">{w.code}</span>
+          </div>
+          <dl class="work__sheet">
+            {sheetRows.map((r) => (
+              <div class="work__row">
+                <dt>{r.label}</dt>
+                <dd>{w[r.key] ?? <span class="work__pending">[PENDIENTE]</span>}</dd>
+              </div>
+            ))}
+          </dl>
+        </li>
+      ))}
+    </ul>
+
+    <p class="works__note">
+      <span class="tag-pending">[NOTA INTERNA]</span>
+      <span>Se publican solo obras con autorización del cliente. Sin fotos de stock ni ajenas.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .works {
+    padding-block: var(--space-9);
+  }
+  .works__head {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    column-gap: var(--space-8);
+    row-gap: var(--space-5);
+    align-items: end;
+    margin-bottom: var(--space-7);
+  }
+  .works__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .works__intro {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+  .works__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .work {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+  .work__frame {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 3;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-accent);
+  }
+  .work__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.35;
+  }
+  .work__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .work__marker {
+    position: relative;
+    margin-inline: var(--space-3);
+    background: var(--color-bg);
+    text-align: center;
+  }
+  .work__code {
+    position: absolute;
+    left: 14px;
+    top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--color-dim);
+  }
+  .work__sheet {
+    margin: 0;
+    padding: var(--space-5);
+  }
+  .work__row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--color-border-strong);
+    font-size: 16px;
+  }
+  .work__row:last-child {
+    border-bottom: 0;
+  }
+  .work__row dt {
+    color: var(--color-muted);
+  }
+  .work__row dd {
+    margin: 0;
+    text-align: right;
+  }
+  .work__pending {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-accent);
+  }
+  .works__note {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: var(--space-7);
+    font-size: 15px;
+    color: var(--color-muted);
+  }
+
+  @media (max-width: 1100px) {
+    .works__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 960px) {
+    .works {
+      padding-block: var(--space-8);
+    }
+    .works__head {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .works__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
