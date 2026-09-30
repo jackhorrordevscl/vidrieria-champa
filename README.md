@@ -36,7 +36,7 @@ Every unknown is a visible marker in the page (search for `[` markers such as `P
 Hosting requirements for the full flow: cPanel or equivalent, PHP 8 or newer, free SSL, mailbox accounts. Domain: `.cl`.
 
 1. Build with `PUBLIC_SITE_URL=https://<domain>` (shell or `.env`). That single variable switches on the canonical and `og:url` tags, `sitemap-index.xml` and the `Sitemap:` line in `robots.txt`.
-2. The 1200×630 share image (`public/og.jpg`) is already wired through `ogImagePath` in `src/config/site.ts`; it only emits `og:image` and `twitter:image` once `PUBLIC_SITE_URL` is set.
+2. The 1200×630 share image (`public/og-marca.jpg`) is already wired through `ogImagePath` in `src/config/site.ts`; it only emits `og:image` and `twitter:image` once `PUBLIC_SITE_URL` is set.
 3. Run `npm run build` and upload `dist/`.
 4. Replace the pending markers with real content as it arrives.
 
