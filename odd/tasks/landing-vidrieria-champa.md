@@ -39,8 +39,8 @@ Implement the landing locally in this repository, create a git repo and a featur
 
 ## Tasks
 - [x] T1 Scaffold Astro project, design tokens, self-hosted fonts, base layout. Route: delegated (writer, multiple files).
-- [ ] T2 Portada: nav, hero, footer. Route: delegated.
-- [ ] T3 Servicios and Urgencias sections. Route: delegated.
+- [x] T2 Portada: nav, hero, footer. Route: delegated. Commit d143594.
+- [x] T3 Servicios and Urgencias sections. Route: delegated. Commit a133de6.
 - [ ] T4 Proceso, Obras, Garantía and FAQ sections. Route: delegated.
 - [ ] T5 Contacto por pasos: 3-step form, WhatsApp message builder. Route: delegated.
 - [ ] T6 SEO (meta, JSON-LD LocalBusiness, sitemap, robots), accessibility and performance pass. Route: delegated.
@@ -62,5 +62,7 @@ T1 done (commit 36e7e95). Remote `origin` added (no push yet). Next: T2.
 ## Verification evidence
 T1: `npm install` ok (0 vulnerabilities); `npm run build` ok (1 page built, re-run by parent); `dist/index.html` exists; no fonts.googleapis.com references in dist. Commit 36e7e95. Route: delegated writer. Note: T1 commit accidentally included `.atl/`; untracked and gitignored in the follow-up chore commit.
 
+T2: `npm run build` ok (writer). T3: `npm run build` ok; built HTML contains "Un vidrio roto no espera", `[POR CONFIRMAR]` and all 19 service names plus 4 group titles (writer); parent re-ran build ok and confirmed the urgencies headline in `dist/index.html`. Contrast ratios computed by hand (not tool-checked). Layout not yet checked in a browser at 360px.
+
 ## Next step
-T2 Portada: nav, hero, footer.
+T4 Proceso, Obras, Garantía and FAQ; then T5 contact form.
