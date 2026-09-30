@@ -18,7 +18,7 @@ export const siteUrl: string | undefined =
 
 /**
  * Path of the social share image inside /public, e.g. "/og.jpg" (1200×630).
- * Temporary stock image until the client provides a real photo: swap /public/og.jpg.
+ * Brand card built from the approved logo mark plus live text (1200×630).
  * Set to undefined to omit og:image and twitter:image.
  */
 export const ogImagePath: string | undefined = '/og.jpg';
