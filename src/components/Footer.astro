@@ -1,0 +1,153 @@
+---
+import { buildWhatsAppUrl, coverage, siteName, whatsappDisplay } from '../config/site';
+
+const sections = [
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#urgencias', label: 'Urgencias' },
+  { href: '#obras', label: 'Obras' },
+];
+const whatsappHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidriería Champa.');
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <p class="wordmark" aria-label={siteName}>
+          <span class="wordmark__a">Vidriería</span>
+          <span class="wordmark__b">Champa</span>
+        </p>
+        <p class="site-footer__tagline">Vidrios a medida y obra. {coverage}. Urgencias 24/7.</p>
+      </div>
+
+      <nav aria-labelledby="footer-sections">
+        <h2 id="footer-sections" class="site-footer__label">Secciones</h2>
+        <ul class="site-footer__list">
+          {sections.map((s) => (
+            <li><a class="site-footer__link" href={s.href}>{s.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div>
+        <h2 class="site-footer__label">Contacto</h2>
+        <ul class="site-footer__list">
+          <li>
+            <a class="site-footer__link site-footer__mono" href={whatsappHref} target="_blank" rel="noopener">
+              WhatsApp {whatsappDisplay}
+            </a>
+          </li>
+          <li><span class="tag-pending">[CORREO PENDIENTE · DOMINIO]</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__legal">
+      <p>© <span class="tag-pending tag-pending--sm">[AÑO]</span> {siteName}</p>
+      <p><span class="tag-pending tag-pending--sm">[LOGO EN RESTAURACIÓN · WORDMARK PROVISORIO]</span></p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-8) var(--space-6);
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 5fr 3fr 4fr;
+    column-gap: var(--space-7);
+    row-gap: var(--space-7);
+    align-items: start;
+  }
+  .wordmark {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 32px;
+  }
+  .wordmark__a {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .wordmark__b {
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--color-dim);
+  }
+  .site-footer__tagline {
+    margin-top: var(--space-3);
+    max-width: 360px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-muted);
+  }
+  .site-footer__label {
+    margin-bottom: var(--space-3);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+  .site-footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: 16px;
+  }
+  .site-footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-soft);
+    text-decoration: none;
+  }
+  .site-footer__link:hover {
+    color: var(--color-accent-hover);
+  }
+  .site-footer__mono {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    color: var(--color-accent);
+  }
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-7);
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    font-size: 14px;
+    color: var(--color-dim);
+  }
+  .tag-pending--sm {
+    padding: 1px 6px;
+  }
+
+  @media (max-width: 960px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 560px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+    }
+    .wordmark {
+      font-size: 26px;
+    }
+    .tag-pending {
+      overflow-wrap: anywhere;
+    }
+  }
+</style>

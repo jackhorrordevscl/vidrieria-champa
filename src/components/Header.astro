@@ -1,0 +1,200 @@
+---
+import { buildWhatsAppUrl, siteName } from '../config/site';
+
+const links = [
+  { href: '#servicios', label: 'Servicios' },
+  { href: '#urgencias', label: 'Urgencias' },
+  { href: '#proceso', label: 'Proceso' },
+  { href: '#obras', label: 'Obras' },
+  { href: '#contacto', label: 'Contacto' },
+];
+const whatsappHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidriería Champa.');
+---
+
+<header class="site-header">
+  <div class="container site-header__bar">
+    <a class="wordmark" href="#" aria-label={`${siteName}, inicio`}>
+      <span class="wordmark__a">Vidriería</span>
+      <span class="wordmark__b">Champa</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-menu-toggle
+    >
+      <span class="sr-only">Menú</span>
+      <span class="menu-toggle__bars" aria-hidden="true"></span>
+    </button>
+
+    <nav id="site-nav" class="site-nav" aria-label="Principal" data-menu>
+      <ul class="site-nav__list">
+        {links.map((l) => (
+          <li><a class="site-nav__link" href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+      <a class="btn btn--primary site-nav__cta" href={whatsappHref} target="_blank" rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  const menu = document.querySelector<HTMLElement>('[data-menu]');
+
+  function setOpen(open: boolean) {
+    toggle?.setAttribute('aria-expanded', String(open));
+    menu?.toggleAttribute('data-open', open);
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    z-index: 20;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+  .site-header__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 88px;
+    gap: var(--space-5);
+  }
+  .wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 28px;
+    min-height: 44px;
+  }
+  .wordmark__a {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--color-text);
+  }
+  .wordmark__b {
+    font-weight: 600;
+    letter-spacing: 0.32em;
+    color: var(--color-dim);
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .site-nav__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .site-nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-soft);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .site-nav__link:hover {
+    color: var(--color-accent);
+  }
+  .site-nav__cta {
+    min-height: 44px;
+    padding: 0 22px;
+    font-size: 1.25rem;
+  }
+  .menu-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+  }
+  .menu-toggle__bars,
+  .menu-toggle__bars::before,
+  .menu-toggle__bars::after {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--color-text);
+    content: '';
+    position: relative;
+  }
+  .menu-toggle__bars::before {
+    position: absolute;
+    top: -6px;
+  }
+  .menu-toggle__bars::after {
+    position: absolute;
+    top: 6px;
+  }
+
+  @media (max-width: 960px) {
+    .site-header__bar {
+      min-height: 72px;
+    }
+    .wordmark {
+      font-size: 24px;
+    }
+    .menu-toggle {
+      display: inline-flex;
+    }
+    .site-nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto 0;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--container-pad) var(--space-5);
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .site-nav[data-open] {
+      display: flex;
+    }
+    .site-nav__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+    .site-nav__link {
+      width: 100%;
+      min-height: 48px;
+      border-bottom: 1px dashed var(--color-border-strong);
+    }
+    .site-nav__cta {
+      min-height: 48px;
+    }
+  }
+  @media (max-width: 380px) {
+    .wordmark__b {
+      letter-spacing: 0.2em;
+    }
+  }
+</style>

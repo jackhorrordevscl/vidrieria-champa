@@ -1,0 +1,163 @@
+---
+import { buildWhatsAppUrl } from '../config/site';
+
+const whatsappHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidriería Champa.');
+const chips = ['Urgencias 24/7', 'Trabajo a medida', 'Vidrio y obra, un solo equipo'];
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">00 — Vidriería a medida · Santiago y regiones</p>
+      <h1 id="hero-title" class="hero__title">
+        Vidrios a medida. Instalados donde <span class="hero__accent">los necesites.</span>
+      </h1>
+      <p class="hero__lead">
+        Trabajamos según lo que pide cada cliente: medimos, preparamos e instalamos. Vidrio y obra con un solo equipo, y atención 24/7 cuando algo se rompe.
+      </p>
+      <div class="hero__ctas">
+        <a class="btn btn--primary hero__btn" href={whatsappHref} target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z"></path></svg>
+          <span>Cotizar por WhatsApp</span>
+        </a>
+        <a class="btn btn--ghost hero__btn" href="#servicios">Ver servicios</a>
+      </div>
+      <ul class="hero__chips" aria-label="Características">
+        {chips.map((c) => <li>{c}</li>)}
+      </ul>
+    </div>
+
+    <figure class="hero__frame">
+      <svg class="hero__lines" viewBox="0 0 520 660" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
+        <path d="M90 330 L200 110 L390 90 L470 270 L410 470 L240 560 L110 460 Z"></path>
+        <path d="M200 110 L260 330 L390 90"></path>
+        <path d="M90 330 L260 330 L470 270"></path>
+        <path d="M110 460 L260 330 L410 470"></path>
+        <path d="M240 560 L260 330"></path>
+        <path d="M200 110 L470 270"></path>
+        <path d="M90 330 L390 90"></path>
+      </svg>
+      <figcaption class="hero__cap hero__cap--top">Fig. 01 · Obra destacada</figcaption>
+      <span class="tag-pending hero__marker">[FOTO OBRA · PORTADA]</span>
+      <span class="hero__cap hero__cap--bottom">0,0 · Santiago y regiones</span>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: var(--space-8);
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    column-gap: var(--space-8);
+    align-items: center;
+  }
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    min-width: 0;
+  }
+  .hero__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.92;
+    font-size: clamp(2.75rem, 1rem + 7vw, 7.375rem);
+    overflow-wrap: break-word;
+  }
+  .hero__accent {
+    color: var(--color-accent);
+  }
+  .hero__lead {
+    max-width: 640px;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.3125rem);
+    color: var(--color-muted);
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .hero__btn {
+    min-height: 64px;
+    font-size: 1.625rem;
+  }
+  .hero__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+  }
+  .hero__chips li {
+    border: 1px solid var(--color-border-strong);
+    padding: 9px 14px;
+  }
+  .hero__frame {
+    position: relative;
+    aspect-ratio: 520 / 660;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    color: var(--color-accent);
+  }
+  .hero__lines {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.55;
+  }
+  .hero__cap {
+    position: absolute;
+    left: 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-dim);
+  }
+  .hero__cap--top {
+    top: 18px;
+  }
+  .hero__cap--bottom {
+    bottom: 18px;
+  }
+  .hero__marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--color-surface);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 960px) {
+    .hero {
+      padding-block: var(--space-7);
+    }
+    .hero__grid {
+      grid-template-columns: 1fr;
+      row-gap: var(--space-7);
+    }
+    .hero__frame {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  @media (max-width: 480px) {
+    .hero__btn {
+      width: 100%;
+      min-height: 56px;
+      font-size: 1.375rem;
+    }
+    .hero__frame {
+      aspect-ratio: 1 / 1;
+    }
+  }
+</style>
