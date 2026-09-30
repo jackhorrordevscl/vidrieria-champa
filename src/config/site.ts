@@ -17,11 +17,12 @@ export const siteUrl: string | undefined =
   (import.meta.env?.PUBLIC_SITE_URL as string | undefined)?.trim().replace(/\/+$/, '') || undefined;
 
 /**
- * Path of the social share image inside /public, e.g. "/og.jpg" (1200×630).
+ * Path of the social share image inside /public, e.g. "/og-marca.jpg" (1200×630).
+ * Give a new file name whenever the image changes: WhatsApp and Facebook cache previews per image URL.
  * Brand card built from the approved logo mark plus live text (1200×630).
  * Set to undefined to omit og:image and twitter:image.
  */
-export const ogImagePath: string | undefined = '/og.jpg';
+export const ogImagePath: string | undefined = '/og-marca.jpg';
 
 export const telephone =`+${whatsappNumber}`;
 export const areaServed = 'Santiago y regiones de Chile';
