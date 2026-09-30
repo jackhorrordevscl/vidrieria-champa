@@ -1,0 +1,175 @@
+---
+import { serviceGroups, urgencyCard } from '../data/services';
+---
+
+<section id="servicios" class="services" aria-labelledby="servicios-title">
+  <div class="container">
+    <div class="services__head">
+      <div class="services__titles">
+        <p class="eyebrow">01 — Servicios</p>
+        <h2 id="servicios-title" class="section-title">Un solo equipo para vidrio y obra.</h2>
+      </div>
+      <p class="services__intro">
+        Compramos el material, lo trabajamos según tu requerimiento y lo instalamos. Si el trabajo incluye obra, no necesitas coordinar a nadie más.
+      </p>
+    </div>
+
+    <div class="services__grid">
+      {serviceGroups.map((g) => (
+        <article class="card">
+          <p class="card__code">{g.code}</p>
+          <h3 class="card__title">{g.title}</h3>
+          <p class="card__summary">{g.summary}</p>
+          <ul class="card__list">
+            {g.items.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      ))}
+
+      <article class="card card--urgent">
+        <div class="card__intro">
+          <p class="card__code card__code--icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            <span>{urgencyCard.code} · {urgencyCard.label}</span>
+          </p>
+          <h3 class="card__title">{urgencyCard.title}</h3>
+          <p class="card__summary">{urgencyCard.summary}</p>
+        </div>
+        <ul class="card__list card__list--flush">
+          {urgencyCard.items.map((item) => (
+            <li>
+              <span>{item.label}</span>
+              {item.pending && <span class="tag-pending tag-pending--sm">[POR CONFIRMAR]</span>}
+            </li>
+          ))}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding-block: var(--space-9);
+  }
+  .services__head {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    column-gap: var(--space-8);
+    row-gap: var(--space-5);
+    align-items: end;
+    margin-bottom: var(--space-7);
+  }
+  .services__titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .services__intro {
+    font-size: 19px;
+    color: var(--color-muted);
+  }
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-6);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+  .card__code {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .card__code--icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.14em;
+  }
+  .card__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.375rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .card__summary {
+    padding-bottom: var(--space-3);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+  .card__list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 14px 0;
+    border-top: 1px dashed var(--color-border-strong);
+    font-size: 17px;
+  }
+  .card--urgent {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 40px;
+    align-items: start;
+    background: transparent;
+    border: 1px dashed var(--color-accent);
+  }
+  .card__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .card--urgent .card__summary {
+    padding-bottom: 0;
+  }
+  .card__list--flush {
+    align-self: start;
+  }
+  .tag-pending--sm {
+    padding: 1px 6px;
+    font-size: 11px;
+  }
+
+  @media (max-width: 1100px) {
+    .services__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 960px) {
+    .services {
+      padding-block: var(--space-8);
+    }
+    .services__head {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 720px) {
+    .services__grid {
+      grid-template-columns: 1fr;
+    }
+    .card--urgent {
+      grid-column: auto;
+      grid-template-columns: 1fr;
+      row-gap: var(--space-4);
+    }
+    .card {
+      padding: var(--space-5);
+    }
+    .card__title {
+      font-size: 2rem;
+    }
+  }
+</style>

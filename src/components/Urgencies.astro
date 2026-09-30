@@ -1,0 +1,171 @@
+---
+import { buildWhatsAppUrl, whatsappDisplay } from '../config/site';
+
+const whatsappHref = buildWhatsAppUrl('Urgencia: necesito ayuda con un vidrio roto.');
+const factors = [
+  { n: '01', title: 'Ubicación', text: 'En Santiago o en regiones, el traslado cambia los tiempos.' },
+  { n: '02', title: 'Disponibilidad del momento', text: 'Depende de la carga de trabajo cuando nos escribes.' },
+  { n: '03', title: 'Material', text: 'Si el vidrio o el perfil hay que pedirlo, se suma ese tiempo.' },
+];
+---
+
+<section id="urgencias" class="urgencies" aria-labelledby="urgencias-title">
+  <div class="container urgencies__grid">
+    <div class="urgencies__main">
+      <div class="urgencies__copy">
+        <p class="eyebrow urgencies__eyebrow">02 — Urgencias · 24/7</p>
+        <h2 id="urgencias-title" class="section-title urgencies__title">Un vidrio roto no espera.</h2>
+        <p class="urgencies__lead">
+          Locales, oficinas y hogares. Mándanos una foto y la dirección por WhatsApp y coordinamos de inmediato.
+        </p>
+      </div>
+      <a class="btn urgencies__btn" href={whatsappHref} target="_blank" rel="noopener">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z"></path></svg>
+        <span>Urgencia por WhatsApp</span>
+        <span class="urgencies__number">{whatsappDisplay}</span>
+      </a>
+    </div>
+
+    <div class="panel">
+      <h3 class="panel__title">¿De qué depende el plazo?</h3>
+      <ol class="panel__list">
+        {factors.map((f) => (
+          <li class="panel__item">
+            <span class="panel__n">{f.n}</span>
+            <div>
+              <p class="panel__name">{f.title}</p>
+              <p class="panel__text">{f.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="panel__note">Te confirmamos un plazo estimado al coordinar, no antes.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Dark text on the accent background: #0E0F10 on #5FD3C2 is about 10:1 */
+  .urgencies {
+    padding-block: var(--space-9);
+    background: var(--color-accent);
+    color: var(--color-bg);
+  }
+  .urgencies__grid {
+    display: grid;
+    grid-template-columns: 6fr 5fr;
+    column-gap: 72px;
+    row-gap: var(--space-7);
+    align-items: stretch;
+  }
+  .urgencies__main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--space-5);
+  }
+  .urgencies__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .urgencies__eyebrow,
+  .urgencies__title {
+    color: var(--color-bg);
+  }
+  .urgencies__title {
+    font-size: clamp(2.75rem, 1rem + 6vw, 7rem);
+    line-height: 0.9;
+  }
+  .urgencies__lead {
+    max-width: 560px;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .urgencies__btn {
+    align-self: flex-start;
+    flex-wrap: wrap;
+    min-height: 64px;
+    padding-block: var(--space-2);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: 1.625rem;
+  }
+  .urgencies__btn:hover {
+    background: var(--color-surface);
+  }
+  .urgencies__btn:focus-visible {
+    outline-color: var(--color-bg);
+  }
+  .urgencies__btn svg {
+    color: var(--color-accent);
+  }
+  .urgencies__number {
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+  .panel {
+    padding: 36px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border-radius: 6px;
+  }
+  .panel__title {
+    padding-bottom: var(--space-2);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.125rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .panel__item {
+    display: flex;
+    gap: 18px;
+    padding: var(--space-4) 0;
+    border-top: 1px dashed var(--color-border-strong);
+  }
+  .panel__n {
+    padding-top: 4px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+  .panel__name {
+    font-weight: 600;
+    font-size: 18px;
+  }
+  .panel__text {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+  .panel__note {
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-strong);
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--color-text-soft);
+  }
+
+  @media (max-width: 960px) {
+    .urgencies {
+      padding-block: var(--space-8);
+    }
+    .urgencies__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .urgencies__btn {
+      align-self: stretch;
+      font-size: 1.375rem;
+    }
+    .panel {
+      padding: var(--space-5);
+    }
+  }
+</style>
