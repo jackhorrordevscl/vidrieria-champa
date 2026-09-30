@@ -16,6 +16,10 @@ import '@fontsource/jetbrains-mono/latin-ext-400.css';
 import '@fontsource/jetbrains-mono/latin-500.css';
 import '@fontsource/jetbrains-mono/latin-ext-500.css';
 import '../styles/global.css';
+import barlow400 from '@fontsource/barlow/files/barlow-latin-400-normal.woff2?url';
+import barlowCondensed800 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2?url';
+import { areaServed, siteName, siteUrl, telephone } from '../config/site';
+import { buildLocalBusiness } from '../lib/structured-data';
 
 interface Props {
   title?: string;
@@ -26,6 +30,15 @@ const {
   title = 'Vidriería Champa · Vidrios a medida en Santiago y regiones',
   description = 'Vidrios a medida y obra en Santiago y regiones. Medimos, preparamos e instalamos, con atención 24/7 para urgencias.',
 } = Astro.props;
+
+const canonical = siteUrl ? `${siteUrl}/` : undefined;
+const jsonLd = buildLocalBusiness({
+  name: siteName,
+  telephone,
+  areaServed,
+  description,
+  url: canonical,
+});
 ---
 
 <!doctype html>
@@ -38,6 +51,21 @@ const {
     <meta name="theme-color" content="#0E0F10" />
     <!-- TODO: replace with the real favicon once the client provides a logo -->
     <link rel="icon" href="/favicon.ico" />
+    <!-- Only the two critical faces are preloaded (body text and hero headline). -->
+    <link rel="preload" href={barlow400} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={barlowCondensed800} as="font" type="font/woff2" crossorigin />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CL" />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <!-- TODO: add og:image / twitter:image once the client provides a real image. -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
