@@ -16,7 +16,7 @@ import '@fontsource/jetbrains-mono/latin-ext-400.css';
 import '@fontsource/jetbrains-mono/latin-500.css';
 import '@fontsource/jetbrains-mono/latin-ext-500.css';
 import '../styles/global.css';
-import { areaServed, siteName, siteUrl, telephone } from '../config/site';
+import { areaServed, ogImagePath, siteName, siteUrl, telephone } from '../config/site';
 import { buildLocalBusiness } from '../lib/structured-data';
 
 interface Props {
@@ -30,6 +30,8 @@ const {
 } = Astro.props;
 
 const canonical = siteUrl ? `${siteUrl}/` : undefined;
+// og:image must be an absolute URL, so it also needs the domain.
+const ogImage = siteUrl && ogImagePath ? `${siteUrl}${ogImagePath}` : undefined;
 const jsonLd = buildLocalBusiness({
   name: siteName,
   telephone,
@@ -57,8 +59,11 @@ const jsonLd = buildLocalBusiness({
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_CL" />
     {canonical && <meta property="og:url" content={canonical} />}
-    <!-- TODO: add og:image / twitter:image once the client provides a real image. -->
-    <meta name="twitter:card" content="summary" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    {ogImage && <meta property="og:image:width" content="1200" />}
+    {ogImage && <meta property="og:image:height" content="630" />}
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

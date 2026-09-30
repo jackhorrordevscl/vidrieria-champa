@@ -16,5 +16,11 @@ export function buildWhatsAppUrl(message: string): string {
 export const siteUrl: string | undefined =
   (import.meta.env?.PUBLIC_SITE_URL as string | undefined)?.trim().replace(/\/+$/, '') || undefined;
 
-export const telephone = `+${whatsappNumber}`;
+/**
+ * Path of the social share image inside /public, e.g. "/og.jpg" (1200×630).
+ * Unset until the client provides an asset: og:image and twitter:image are then omitted.
+ */
+export const ogImagePath: string | undefined = undefined;
+
+export const telephone =`+${whatsappNumber}`;
 export const areaServed = 'Santiago y regiones de Chile';
