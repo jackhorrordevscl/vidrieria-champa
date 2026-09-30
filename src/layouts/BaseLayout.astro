@@ -16,6 +16,8 @@ import '@fontsource/jetbrains-mono/latin-ext-400.css';
 import '@fontsource/jetbrains-mono/latin-500.css';
 import '@fontsource/jetbrains-mono/latin-ext-500.css';
 import '../styles/global.css';
+import barlowCondensed700 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-700-normal.woff2?url';
+import barlowCondensed800 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2?url';
 import { areaServed, ogImagePath, siteName, siteUrl, telephone } from '../config/site';
 import { buildLocalBusiness } from '../lib/structured-data';
 
@@ -28,6 +30,9 @@ const {
   title = 'Vidriería Champa · Vidrios a medida en Santiago y regiones',
   description = 'Vidrios a medida y obra en Santiago y regiones. Medimos, preparamos e instalamos, con atención 24/7 para urgencias.',
 } = Astro.props;
+
+// Fonts used above the fold (hero title and buttons): preloading avoids the swap-induced layout shift.
+const criticalFonts = [barlowCondensed800, barlowCondensed700];
 
 const canonical = siteUrl ? `${siteUrl}/` : undefined;
 // og:image must be an absolute URL, so it also needs the domain.
@@ -49,6 +54,7 @@ const jsonLd = buildLocalBusiness({
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0E0F10" />
+    {criticalFonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     <script is:inline>document.documentElement.classList.add('js');</script>
     <!-- TODO: replace with the real favicon once the client provides a logo -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
