@@ -16,8 +16,6 @@ import '@fontsource/jetbrains-mono/latin-ext-400.css';
 import '@fontsource/jetbrains-mono/latin-500.css';
 import '@fontsource/jetbrains-mono/latin-ext-500.css';
 import '../styles/global.css';
-import barlow400 from '@fontsource/barlow/files/barlow-latin-400-normal.woff2?url';
-import barlowCondensed800 from '@fontsource/barlow-condensed/files/barlow-condensed-latin-800-normal.woff2?url';
 import { areaServed, siteName, siteUrl, telephone } from '../config/site';
 import { buildLocalBusiness } from '../lib/structured-data';
 
@@ -52,9 +50,6 @@ const jsonLd = buildLocalBusiness({
     <script is:inline>document.documentElement.classList.add('js');</script>
     <!-- TODO: replace with the real favicon once the client provides a logo -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <!-- Only the two critical faces are preloaded (body text and hero headline). -->
-    <link rel="preload" href={barlow400} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={barlowCondensed800} as="font" type="font/woff2" crossorigin />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
