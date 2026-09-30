@@ -1,0 +1,46 @@
+---
+import '@fontsource/barlow-condensed/latin-600.css';
+import '@fontsource/barlow-condensed/latin-ext-600.css';
+import '@fontsource/barlow-condensed/latin-700.css';
+import '@fontsource/barlow-condensed/latin-ext-700.css';
+import '@fontsource/barlow-condensed/latin-800.css';
+import '@fontsource/barlow-condensed/latin-ext-800.css';
+import '@fontsource/barlow/latin-400.css';
+import '@fontsource/barlow/latin-ext-400.css';
+import '@fontsource/barlow/latin-500.css';
+import '@fontsource/barlow/latin-ext-500.css';
+import '@fontsource/barlow/latin-600.css';
+import '@fontsource/barlow/latin-ext-600.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-ext-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-ext-500.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Vidriería Champa · Vidrios a medida en Santiago y regiones',
+  description = 'Vidrios a medida y obra en Santiago y regiones. Medimos, preparamos e instalamos, con atención 24/7 para urgencias.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0E0F10" />
+    <!-- TODO: replace with the real favicon once the client provides a logo -->
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <slot />
+  </body>
+</html>

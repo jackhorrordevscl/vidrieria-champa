@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap: https://example.com/sitemap-index.xml
+# TODO: uncomment and set the real domain once it exists.
