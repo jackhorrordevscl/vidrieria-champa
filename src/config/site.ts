@@ -18,9 +18,10 @@ export const siteUrl: string | undefined =
 
 /**
  * Path of the social share image inside /public, e.g. "/og.jpg" (1200×630).
- * Unset until the client provides an asset: og:image and twitter:image are then omitted.
+ * Temporary stock image until the client provides a real photo: swap /public/og.jpg.
+ * Set to undefined to omit og:image and twitter:image.
  */
-export const ogImagePath: string | undefined = undefined;
+export const ogImagePath: string | undefined = '/og.jpg';
 
 export const telephone =`+${whatsappNumber}`;
 export const areaServed = 'Santiago y regiones de Chile';
