@@ -538,6 +538,7 @@ const navSteps = [
     color: var(--color-accent);
   }
   .tile__name {
+    overflow-wrap: anywhere;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1.75rem;
@@ -716,7 +717,7 @@ const navSteps = [
       padding-block: var(--space-8);
     }
     .contact__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
   }
   @media (max-width: 640px) {
@@ -725,7 +726,7 @@ const navSteps = [
     }
     .tiles__grid,
     .fields {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .panel__title {
       font-size: 2.25rem;
