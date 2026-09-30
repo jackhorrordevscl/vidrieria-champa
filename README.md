@@ -23,29 +23,27 @@ Phase 2, when the domain and mailbox exist: add email delivery (with photos) on 
 Every unknown is a visible marker in the page (search for `[` markers such as `PENDIENTE`). Nothing is invented.
 
 - [ ] Real work photos with written customer authorization (`[FOTO OBRA …]`, work sheets in `src/data/works.ts`)
-- [ ] Restored logo, and whether "Vidriería" is intentionally written without an accent (`[LOGO EN RESTAURACIÓN …]`)
 - [ ] Domain and business email (`[CORREO PENDIENTE · DOMINIO]`)
 - [ ] Warranty details: what it covers, for how long, what it excludes (`[GARANTÍA PENDIENTE …]`, FAQ answer)
 - [ ] Real testimonials with name and authorization (`[TESTIMONIO PENDIENTE …]`)
 - [ ] Confirm the process, including the on-site visit and measurement (`[PROCESO A CONFIRMAR …]`)
 - [ ] Confirm provisional sealing of the opening as an urgent service (`[POR CONFIRMAR]`)
 - [ ] Optional: name of a responsible person to show on the site
-- [ ] Favicon and social preview image (`og:image`)
+- [ ] Optional: the original logo in high resolution (the current mark is a recreation approved by the client, see `design-assets/`)
 
 ## Publishing checklist (when the client buys hosting and a domain)
 
 Hosting requirements for the full flow: cPanel or equivalent, PHP 8 or newer, free SSL, mailbox accounts. Domain: `.cl`.
 
 1. Build with `PUBLIC_SITE_URL=https://<domain>` (shell or `.env`). That single variable switches on the canonical and `og:url` tags, `sitemap-index.xml` and the `Sitemap:` line in `robots.txt`.
-2. Add a 1200×630 share image to `public/` and set `ogImagePath` in `src/config/site.ts` (enables `og:image`, `twitter:image` and the large Twitter card).
-3. Replace the provisional favicon with the real one.
-4. Run `npm run build` and upload `dist/`.
-5. Replace the pending markers with real content as it arrives.
+2. The 1200×630 share image (`public/og.jpg`) is already wired through `ogImagePath` in `src/config/site.ts`; it only emits `og:image` and `twitter:image` once `PUBLIC_SITE_URL` is set.
+3. Run `npm run build` and upload `dist/`.
+4. Replace the pending markers with real content as it arrives.
 
 ## Structure
 
 - `src/components/` page sections, `src/data/` editable content (services, works, FAQ)
 - `src/lib/` pure logic with tests, `src/config/site.ts` business constants
 - `src/styles/` design tokens and global styles
-- `_design/` source files of the approved visual sketch, `design-assets/` original logo (low resolution)
+- `_design/` source files of the approved visual sketch, `design-assets/` original logo (low resolution) and its recreation
 - `odd/tasks/` feature plan and progress log

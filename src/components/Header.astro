@@ -14,6 +14,7 @@ const whatsappHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidri
 <header class="site-header">
   <div class="container site-header__bar">
     <a class="wordmark" href="#">
+      <img class="wordmark__mark" src="/logo-mark.png" alt="" width="33" height="44" />
       <span class="wordmark__a">Vidriería</span>
       <span class="wordmark__b">Champa</span>
     </a>
@@ -79,13 +80,18 @@ const whatsappHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidri
   }
   .wordmark {
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
     gap: var(--space-3);
     font-family: var(--font-display);
     text-transform: uppercase;
     text-decoration: none;
     font-size: 28px;
     min-height: 44px;
+  }
+  .wordmark__mark {
+    width: 33px;
+    height: 44px;
+    margin-right: var(--space-1);
   }
   .wordmark__a {
     font-weight: 700;

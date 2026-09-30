@@ -56,8 +56,8 @@ const jsonLd = buildLocalBusiness({
     <meta name="theme-color" content="#0E0F10" />
     {criticalFonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}
     <script is:inline>document.documentElement.classList.add('js');</script>
-    <!-- TODO: replace with the real favicon once the client provides a logo -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={siteName} />
