@@ -1,0 +1,740 @@
+---
+import { buildWhatsAppUrl, whatsappDisplay } from '../config/site';
+import { serviceOptions } from '../lib/whatsapp-message';
+
+// Used as-is when JavaScript is off; the script replaces it with the full request message.
+const fallbackHref = buildWhatsAppUrl('Hola, quiero cotizar un trabajo con Vidriería Champa.');
+
+const navSteps = [
+  { n: '01', title: 'Qué necesitas' },
+  { n: '02', title: 'Dónde y detalles' },
+  { n: '03', title: 'Cómo te respondemos' },
+];
+---
+
+<section id="contacto" class="contact" aria-labelledby="contacto-title">
+  <div class="container contact__grid">
+    <div class="contact__intro">
+      <p class="eyebrow">06 — Contacto</p>
+      <h2 id="contacto-title" class="section-title">Tres pasos, cero vueltas.</h2>
+      <p class="contact__lead">
+        Elige qué necesitas, dinos dónde y cómo responderte. Si prefieres, escribe directo por WhatsApp.
+      </p>
+
+      <ol class="contact__nav" data-nav-list>
+        {navSteps.map((s) => (
+          <li class="nav-item" data-nav>
+            <span class="nav-item__n">{s.n}</span>
+            <span class="nav-item__title">{s.title}</span>
+          </li>
+        ))}
+      </ol>
+
+      <a class="contact__direct" href={fallbackHref} target="_blank" rel="noopener noreferrer">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-4.2A8 8 0 1 1 8.4 18.8L4 20z"></path></svg>
+        <span>Prefiero WhatsApp directo: <b>{whatsappDisplay}</b></span>
+      </a>
+    </div>
+
+    <div class="wizard" data-wizard>
+      <div class="wizard__progress" data-enhanced-only>
+        <div class="wizard__meta">
+          <span data-step-label>PASO 1 DE 3</span>
+          <span>ATENCIÓN 24/7</span>
+        </div>
+        <div class="wizard__bars" aria-hidden="true">
+          <span data-bar></span><span data-bar></span><span data-bar></span>
+        </div>
+      </div>
+      <p class="sr-only" role="status" aria-live="polite" data-live></p>
+
+      <form class="wizard__form" data-form novalidate autocomplete="on">
+        <!-- Step 1 -->
+        <section class="panel" data-panel="1" aria-labelledby="cw-h1">
+          <fieldset class="tiles" aria-describedby="cw-service-error">
+            <legend class="panel__title" id="cw-h1" tabindex="-1">¿Qué necesitas?</legend>
+            <div class="tiles__grid">
+              {serviceOptions.map((o) => (
+                <label class="tile">
+                  <input class="tile__input" type="radio" name="service" value={o.id} data-urgent={o.urgent ? 'true' : 'false'} />
+                  <span class="tile__body">
+                    <span class="tile__num">{o.num}</span>
+                    <span class="tile__name">{o.name}</span>
+                    <span class="tile__desc">{o.desc}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+            <p class="field__error" id="cw-service-error" data-error="service"></p>
+          </fieldset>
+          <div class="panel__actions panel__actions--end" data-enhanced-only>
+            <button type="button" class="btn btn--primary wizard__btn" data-next>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="panel" data-panel="2" aria-labelledby="cw-h2">
+          <h3 class="panel__title" id="cw-h2" tabindex="-1">Dónde y detalles</h3>
+          <div class="fields">
+            <div class="field">
+              <label for="cw-place">Comuna o ciudad</label>
+              <input id="cw-place" name="place" type="text" autocomplete="address-level2" placeholder="Ej: Providencia, Rancagua" />
+            </div>
+            <div class="field">
+              <label for="cw-measures">Medidas aproximadas (opcional)</label>
+              <input id="cw-measures" name="measures" type="text" placeholder="Ej: 120 x 200 cm" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="cw-details">¿Qué hay que hacer?</label>
+            <textarea id="cw-details" name="details" rows="5" placeholder="Cuéntanos qué hay que cambiar, reparar o instalar."></textarea>
+          </div>
+          <p class="photo-note">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><circle cx="9" cy="11" r="2"></circle><path d="M21 16l-5-5-8 8"></path></svg>
+            <span>Después de enviar tu solicitud, puedes mandarnos fotos del lugar o del vidrio dañado por WhatsApp.</span>
+          </p>
+          <div class="panel__actions" data-enhanced-only>
+            <button type="button" class="btn btn--ghost wizard__btn" data-back>Atrás</button>
+            <button type="button" class="btn btn--primary wizard__btn" data-next>Siguiente</button>
+          </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="panel" data-panel="3" aria-labelledby="cw-h3">
+          <h3 class="panel__title" id="cw-h3" tabindex="-1">Cómo te respondemos</h3>
+          <p class="urgent-banner" data-urgent-banner hidden>SOLICITUD MARCADA COMO URGENCIA · ATENCIÓN 24/7</p>
+          <div class="fields">
+            <div class="field">
+              <label for="cw-name">Nombre</label>
+              <input id="cw-name" name="name" type="text" autocomplete="name" placeholder="Tu nombre" aria-required="true" aria-describedby="cw-name-error" />
+              <p class="field__error" id="cw-name-error" data-error="name"></p>
+            </div>
+            <div class="field">
+              <label for="cw-phone">Teléfono o WhatsApp</label>
+              <input id="cw-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+56 9 0000 0000" aria-required="true" aria-describedby="cw-phone-error" />
+              <p class="field__error" id="cw-phone-error" data-error="phone"></p>
+            </div>
+          </div>
+
+          <div class="summary" data-summary data-enhanced-only>
+            <p class="summary__title">Resumen de tu solicitud</p>
+            <dl class="summary__list">
+              <div><dt>Servicio</dt><dd data-sum="service"></dd></div>
+              <div><dt>Lugar</dt><dd data-sum="place"></dd></div>
+              <div><dt>Medidas</dt><dd data-sum="measures"></dd></div>
+              <div><dt>Detalle</dt><dd data-sum="details"></dd></div>
+            </dl>
+            <p class="summary__note">Al enviar, se abre WhatsApp con este mensaje listo para mandar al {whatsappDisplay}.</p>
+          </div>
+
+          <div class="panel__actions">
+            <button type="button" class="btn btn--ghost wizard__btn" data-back data-enhanced-only>Atrás</button>
+            <a class="btn btn--primary wizard__btn" href={fallbackHref} target="_blank" rel="noopener noreferrer" data-send>
+              <span data-send-label>Enviar por WhatsApp</span>
+            </a>
+          </div>
+          <p class="mail-note">Correo de contacto: <span class="tag-pending">[CORREO PENDIENTE · DOMINIO]</span></p>
+        </section>
+      </form>
+
+      <div class="done" data-done hidden>
+        <p class="done__kicker">SOLICITUD LISTA</p>
+        <h3 class="done__title" id="cw-done-title" tabindex="-1">Tu solicitud está lista.</h3>
+        <p class="done__text">
+          Abrimos WhatsApp con tu solicitud. Si no se abrió, escríbenos al {whatsappDisplay}.
+        </p>
+        <div class="done__actions">
+          <a class="btn btn--primary wizard__btn" href={fallbackHref} target="_blank" rel="noopener noreferrer" data-resend>Abrir WhatsApp</a>
+          <button type="button" class="btn btn--ghost wizard__btn" data-restart>Nueva solicitud</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { buildWhatsAppUrl } from '../config/site';
+  import {
+    buildRequestMessage,
+    findService,
+    validateStep1,
+    validateStep3,
+    type ValidationErrors,
+  } from '../lib/whatsapp-message';
+
+  const root = document.querySelector<HTMLElement>('[data-wizard]');
+  if (root) initWizard(root);
+
+  function initWizard(root: HTMLElement) {
+    const form = root.querySelector<HTMLFormElement>('[data-form]')!;
+    const panels = [...root.querySelectorAll<HTMLElement>('[data-panel]')];
+    const bars = [...root.querySelectorAll<HTMLElement>('[data-bar]')];
+    const navItems = [...document.querySelectorAll<HTMLElement>('[data-nav]')];
+    const label = root.querySelector<HTMLElement>('[data-step-label]')!;
+    const live = root.querySelector<HTMLElement>('[data-live]')!;
+    const done = root.querySelector<HTMLElement>('[data-done]')!;
+    const banner = root.querySelector<HTMLElement>('[data-urgent-banner]')!;
+    const sendBtn = root.querySelector<HTMLAnchorElement>('[data-send]')!;
+    const sendLabel = root.querySelector<HTMLElement>('[data-send-label]')!;
+    const resend = root.querySelector<HTMLAnchorElement>('[data-resend]')!;
+    const navList = document.querySelector<HTMLElement>('[data-nav-list]');
+    const titles = ['¿Qué necesitas?', 'Dónde y detalles', 'Cómo te respondemos'];
+
+    let step = 1;
+
+    const field = (name: string) => form.elements.namedItem(name) as HTMLInputElement;
+    const value = (name: string) => field(name).value.trim();
+    const selectedRadio = () => form.querySelector<HTMLInputElement>('input[name="service"]:checked');
+
+    function setError(key: string, message?: string) {
+      const el = root.querySelector<HTMLElement>(`[data-error="${key}"]`);
+      if (el) el.textContent = message ?? '';
+      if (key !== 'service') field(key).setAttribute('aria-invalid', message ? 'true' : 'false');
+    }
+
+    function showErrors(errors: ValidationErrors, keys: Array<'service' | 'name' | 'phone'>) {
+      keys.forEach((k) => setError(k, errors[k]));
+      const first = keys.find((k) => errors[k]);
+      if (!first) return false;
+      if (first === 'service') {
+        (selectedRadio() ?? form.querySelector<HTMLInputElement>('input[name="service"]'))?.focus();
+      } else {
+        field(first).focus();
+      }
+      return true;
+    }
+
+    function validate(n: number): boolean {
+      if (n === 1) return !showErrors(validateStep1(selectedRadio()?.value), ['service']);
+      if (n === 3) return !showErrors(validateStep3(value('name'), value('phone')), ['name', 'phone']);
+      return true;
+    }
+
+    function isUrgent() {
+      return selectedRadio()?.dataset.urgent === 'true';
+    }
+
+    function buildMessage() {
+      const service = findService(selectedRadio()?.value);
+      return buildRequestMessage({
+        service: service?.name ?? '',
+        urgent: isUrgent(),
+        place: value('place'),
+        measures: value('measures'),
+        details: value('details'),
+        name: value('name'),
+        phone: value('phone'),
+      });
+    }
+
+    function renderSummary() {
+      const service = findService(selectedRadio()?.value);
+      const set = (k: string, text: string) => {
+        root.querySelector<HTMLElement>(`[data-sum="${k}"]`)!.textContent = text;
+      };
+      set('service', service?.name ?? '');
+      set('place', value('place') || 'No indicado');
+      set('measures', value('measures') || 'No indicadas');
+      set('details', value('details') || 'No indicado');
+      banner.hidden = !isUrgent();
+      sendLabel.textContent = isUrgent() ? 'Enviar urgencia por WhatsApp' : 'Enviar por WhatsApp';
+    }
+
+    function paintProgress(current: number, finished: boolean) {
+      bars.forEach((b, i) => b.classList.toggle('is-on', finished || i + 1 <= current));
+      navItems.forEach((li, i) => {
+        if (!finished && i + 1 === current) li.setAttribute('aria-current', 'step');
+        else li.removeAttribute('aria-current');
+      });
+      navList?.classList.toggle('is-done', finished);
+      label.textContent = finished ? 'LISTO' : `PASO ${current} DE 3`;
+    }
+
+    function goTo(n: number, moveFocus = true) {
+      step = n;
+      panels.forEach((p) => {
+        p.hidden = Number(p.dataset.panel) !== n;
+      });
+      form.hidden = false;
+      done.hidden = true;
+      if (n === 3) renderSummary();
+      paintProgress(n, false);
+      live.textContent = `Paso ${n} de 3: ${titles[n - 1]}`;
+      if (moveFocus) panels[n - 1].querySelector<HTMLElement>('[tabindex="-1"]')?.focus();
+    }
+
+    function showDone() {
+      form.hidden = true;
+      done.hidden = false;
+      paintProgress(3, true);
+      live.textContent = 'Solicitud lista. Abrimos WhatsApp con tu mensaje.';
+      done.querySelector<HTMLElement>('[tabindex="-1"]')?.focus();
+    }
+
+    function next() {
+      if (step < 3 && validate(step)) goTo(step + 1);
+    }
+
+    root.querySelectorAll('[data-next]').forEach((b) => b.addEventListener('click', next));
+    root.querySelectorAll('[data-back]').forEach((b) =>
+      b.addEventListener('click', () => step > 1 && goTo(step - 1)),
+    );
+
+    sendBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!validate(3)) return;
+      const url = buildWhatsAppUrl(buildMessage());
+      resend.href = url;
+      sendBtn.href = url;
+      window.open(url, '_blank', 'noopener,noreferrer');
+      showDone();
+    });
+
+    root.querySelector('[data-restart]')!.addEventListener('click', () => {
+      form.reset();
+      ['service', 'name', 'phone'].forEach((k) => setError(k));
+      goTo(1);
+    });
+
+    // Enter advances (or sends on the last step) without submitting the form.
+    form.addEventListener('submit', (e) => e.preventDefault());
+    form.addEventListener('keydown', (e) => {
+      const t = e.target as HTMLElement;
+      if (e.key !== 'Enter' || t.tagName !== 'INPUT' || (t as HTMLInputElement).type === 'radio') return;
+      e.preventDefault();
+      if (step < 3) next();
+      else sendBtn.click();
+    });
+
+    // Clear errors as soon as the user fixes the field.
+    form.addEventListener('input', (e) => {
+      const t = e.target as HTMLInputElement;
+      if (t.name === 'service' || t.name === 'name' || t.name === 'phone') setError(t.name);
+    });
+
+    root.classList.add('is-enhanced');
+    navList?.classList.add('is-enhanced');
+    goTo(1, false);
+  }
+</script>
+
+<style>
+  .contact {
+    padding-block: var(--space-9);
+    --color-error: #ff9a8f;
+  }
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    column-gap: var(--space-9);
+    row-gap: var(--space-7);
+    align-items: start;
+  }
+  .contact__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+  .contact__lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+  .contact__nav {
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+  }
+  .nav-item {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .nav-item__n {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+  .nav-item__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.625rem;
+    text-transform: uppercase;
+  }
+  /* With JS, only the active step (or all, once finished) is highlighted */
+  .contact__nav.is-enhanced:not(.is-done) .nav-item:not([aria-current='step']),
+  .contact__nav.is-enhanced:not(.is-done) .nav-item:not([aria-current='step']) .nav-item__n {
+    color: var(--color-dim);
+  }
+  .contact__direct {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    font-size: 17px;
+    text-decoration: none;
+  }
+  .contact__direct svg {
+    flex: none;
+    color: var(--color-accent);
+  }
+  .contact__direct:hover b {
+    color: var(--color-accent-hover);
+  }
+  .contact__direct b {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--color-accent);
+  }
+
+  .wizard {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: 40px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+  .wizard:not(.is-enhanced) [data-enhanced-only] {
+    display: none;
+  }
+  .wizard__progress {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wizard__meta {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    color: var(--color-muted);
+  }
+  .wizard__bars {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-2);
+  }
+  .wizard__bars span {
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+  .wizard__bars span.is-on {
+    background: var(--color-accent);
+  }
+  .wizard__form {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+  .wizard.is-enhanced .wizard__form {
+    gap: 0;
+  }
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 0;
+  }
+  .panel[hidden],
+  .done[hidden],
+  .wizard__form[hidden] {
+    display: none;
+  }
+  .panel__title {
+    padding: 0;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 2.75rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .panel__title:focus-visible,
+  .done__title:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+  .panel__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .panel__actions--end {
+    justify-content: flex-end;
+  }
+  .wizard__btn {
+    min-height: 56px;
+    font-size: 1.5rem;
+  }
+
+  .tiles {
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .tiles > legend {
+    margin-bottom: 28px;
+  }
+  .tiles .field__error {
+    margin-top: var(--space-3);
+  }
+  .tiles__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .tile {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+  .tile__input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .tile__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    height: 100%;
+    min-height: 148px;
+    padding: 22px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    transition: border-color 0.15s ease, background-color 0.15s ease;
+  }
+  .tile:hover .tile__body {
+    border-color: var(--color-accent);
+  }
+  .tile__input:checked + .tile__body {
+    padding: 21px;
+    border: 2px solid var(--color-accent);
+    background: var(--color-accent-deep-bg);
+  }
+  .tile__input:focus-visible + .tile__body {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .tile__num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+  }
+  .tile__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .tile__desc {
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--color-muted);
+  }
+
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  .field label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--color-text-soft);
+  }
+  .field input,
+  .field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
+    font-size: 16px;
+  }
+  .field textarea {
+    min-height: 132px;
+    padding: 12px 14px;
+    resize: vertical;
+  }
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: var(--color-dim);
+  }
+  .field input[aria-invalid='true'] {
+    border-color: var(--color-error);
+  }
+  .field__error {
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--color-error);
+  }
+  .field__error:empty {
+    display: none;
+  }
+
+  .photo-note {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: var(--space-4);
+    border: 1px dashed var(--color-border-strong);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    color: var(--color-muted);
+  }
+  .photo-note svg {
+    flex: none;
+  }
+
+  .urgent-banner {
+    padding: 12px 16px;
+    border: 1px dashed var(--color-accent);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+  .urgent-banner[hidden] {
+    display: none;
+  }
+
+  .summary {
+    padding: var(--space-5);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+  }
+  .summary__title {
+    padding-bottom: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .summary__list {
+    margin: 0;
+  }
+  .summary__list > div {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 10px 0;
+    border-top: 1px dashed var(--color-border-strong);
+    font-size: 16px;
+  }
+  .summary__list dt {
+    flex: none;
+    color: var(--color-muted);
+  }
+  .summary__list dd {
+    margin: 0;
+    min-width: 0;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+  .summary__note {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border-strong);
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--color-muted);
+  }
+  .mail-note {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-dim);
+  }
+
+  .done {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    padding-block: var(--space-6);
+  }
+  .done__kicker {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: var(--color-accent);
+  }
+  .done__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 3.5rem;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .done__text {
+    max-width: 520px;
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--color-muted);
+  }
+  .done__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  @media (max-width: 1100px) {
+    .contact__grid {
+      column-gap: var(--space-7);
+    }
+  }
+  @media (max-width: 960px) {
+    .contact {
+      padding-block: var(--space-8);
+    }
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .wizard {
+      padding: var(--space-5) var(--space-4);
+    }
+    .tiles__grid,
+    .fields {
+      grid-template-columns: 1fr;
+    }
+    .panel__title {
+      font-size: 2.25rem;
+    }
+    .done__title {
+      font-size: 2.5rem;
+    }
+    .panel__actions .btn {
+      flex: 1 1 auto;
+    }
+  }
+</style>
