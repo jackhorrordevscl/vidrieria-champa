@@ -36,9 +36,9 @@ Every unknown is a visible marker in the page (search for `[` markers such as `P
 
 Hosting requirements for the full flow: cPanel or equivalent, PHP 8 or newer, free SSL, mailbox accounts. Domain: `.cl`.
 
-1. Set `PUBLIC_SITE_URL` (for canonical and Open Graph URLs) and `site` in `astro.config.mjs`.
-2. Uncomment the `Sitemap` line in `public/robots.txt` and add a sitemap.
-3. Add the favicon and `og:image`.
+1. Build with `PUBLIC_SITE_URL=https://<domain>` (shell or `.env`). That single variable switches on the canonical and `og:url` tags, `sitemap-index.xml` and the `Sitemap:` line in `robots.txt`.
+2. Add a 1200×630 share image to `public/` and set `ogImagePath` in `src/config/site.ts` (enables `og:image`, `twitter:image` and the large Twitter card).
+3. Replace the provisional favicon with the real one.
 4. Run `npm run build` and upload `dist/`.
 5. Replace the pending markers with real content as it arrives.
 
