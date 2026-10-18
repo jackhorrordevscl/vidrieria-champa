@@ -24,7 +24,7 @@ Every unknown is a visible marker in the page (search for `[` markers such as `P
 
 - [ ] Real work photos with written customer authorization (`[FOTO OBRA …]`, work sheets in `src/data/works.ts`)
 - [ ] Domain and business email (`[CORREO PENDIENTE · DOMINIO]`)
-- [ ] Warranty details: duration (3 months) and exclusions (wear, misuse) are confirmed; what it covers is still missing (`[GARANTÍA · FALTA DEFINIR QUÉ CUBRE]`)
+- [ ] Client to confirm the warranty coverage and exclusions listed in `src/components/Warranty.astro` (proposed, not yet confirmed)
 - [ ] Real testimonials with name and authorization (`[TESTIMONIO PENDIENTE …]`)
 - [ ] Client to confirm the wording "Visita técnica, con costo según el caso" in `src/data/services.ts`
 - [ ] Optional: name of a responsible person to show on the site

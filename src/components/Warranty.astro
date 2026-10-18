@@ -1,10 +1,25 @@
 ---
 import { whatsappDisplay } from '../config/site';
 
-const rows = [
-  { label: 'Qué cubre', value: undefined },
+const rows: { label: string; value: string | string[] }[] = [
+  {
+    label: 'Qué cubre',
+    value: [
+      'Fallas de instalación: mal sellado, filtraciones, vidrio mal asentado',
+      'Defectos del material que venían de origen',
+      'Herrajes, ruedas y cierres instalados que fallen antes de tiempo',
+      'Medidas o ajustes mal tomados',
+    ],
+  },
   { label: 'Por cuánto tiempo', value: '3 meses' },
-  { label: 'Qué no cubre', value: 'Desgaste por uso y mal uso' },
+  {
+    label: 'Qué no cubre',
+    value: [
+      'Desgaste por uso y mal uso',
+      'Golpes y daños por terceros',
+      'Sismos y vandalismo',
+    ],
+  },
 ];
 const testimonials = [1, 2];
 ---
@@ -21,12 +36,19 @@ const testimonials = [1, 2];
       </div>
 
       <div class="card">
-        <p class="card__marker">[GARANTÍA · FALTA DEFINIR QUÉ CUBRE]</p>
         <dl class="card__rows">
           {rows.map((r) => (
             <div class="card__row">
               <dt>{r.label}</dt>
-              {r.value ? <dd>{r.value}</dd> : <dd class="card__pending">[POR DEFINIR]</dd>}
+              {Array.isArray(r.value) ? (
+                <dd class="card__dd--list">
+                  <ul class="card__list">
+                    {r.value.map((v) => <li>{v}</li>)}
+                  </ul>
+                </dd>
+              ) : (
+                <dd>{r.value}</dd>
+              )}
             </div>
           ))}
           <div class="card__row">
@@ -101,6 +123,17 @@ const testimonials = [1, 2];
   }
   .card__row dd {
     margin: 0;
+  }
+  .card__dd--list {
+    flex-basis: 100%;
+  }
+  .card__list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
   .card__pending {
     font-family: var(--font-mono);
