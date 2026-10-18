@@ -68,6 +68,5 @@ export const urgencyCard = {
     { label: 'Reposición urgente en locales comerciales' },
     { label: 'Visita técnica exprés' },
     { label: 'Atención fuera de horario, todos los días' },
-    { label: 'Soluciones provisorias de resguardo', pending: true },
   ] satisfies UrgencyItem[],
 };
