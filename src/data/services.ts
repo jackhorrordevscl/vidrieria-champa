@@ -66,7 +66,7 @@ export const urgencyCard = {
     'Por ejemplo, una mampara rota en un restorán antes de la apertura. Atendemos a toda hora, en Santiago y regiones.',
   items: [
     { label: 'Reposición urgente en locales comerciales' },
-    { label: 'Visita técnica exprés' },
+    { label: 'Visita técnica, con costo según el caso' },
     { label: 'Atención fuera de horario, todos los días' },
   ] satisfies UrgencyItem[],
 };

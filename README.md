@@ -26,7 +26,7 @@ Every unknown is a visible marker in the page (search for `[` markers such as `P
 - [ ] Domain and business email (`[CORREO PENDIENTE · DOMINIO]`)
 - [ ] Warranty details: duration (3 months) and exclusions (wear, misuse) are confirmed; what it covers is still missing (`[GARANTÍA · FALTA DEFINIR QUÉ CUBRE]`)
 - [ ] Real testimonials with name and authorization (`[TESTIMONIO PENDIENTE …]`)
-- [ ] Clarify whether the on-site visit has a cost, then reword "Visita técnica exprés" in `src/data/services.ts`
+- [ ] Client to confirm the wording "Visita técnica, con costo según el caso" in `src/data/services.ts`
 - [ ] Optional: name of a responsible person to show on the site
 - [ ] Optional: the original logo in high resolution (the current mark is a recreation approved by the client, see `design-assets/`)
 
