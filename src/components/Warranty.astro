@@ -1,7 +1,11 @@
 ---
 import { whatsappDisplay } from '../config/site';
 
-const rows = ['Qué cubre', 'Por cuánto tiempo', 'Qué no cubre'];
+const rows = [
+  { label: 'Qué cubre', value: undefined },
+  { label: 'Por cuánto tiempo', value: '3 meses' },
+  { label: 'Qué no cubre', value: 'Desgaste por uso y mal uso' },
+];
 const testimonials = [1, 2];
 ---
 
@@ -12,22 +16,22 @@ const testimonials = [1, 2];
         <p class="eyebrow">05 — Garantía</p>
         <h2 id="garantia-title" class="section-title">Trabajo respaldado.</h2>
         <p class="warranty__lead">
-          Cada trabajo se entrega con garantía. Aquí explicamos qué cubre, por cuánto tiempo y a quién escribir.
+          Cada trabajo se entrega con 3 meses de garantía. Aquí explicamos qué cubre, por cuánto tiempo y a quién escribir.
         </p>
       </div>
 
       <div class="card">
-        <p class="card__marker">[GARANTÍA PENDIENTE · DETALLES DEL CLIENTE]</p>
+        <p class="card__marker">[GARANTÍA · FALTA DEFINIR QUÉ CUBRE]</p>
         <dl class="card__rows">
           {rows.map((r) => (
             <div class="card__row">
-              <dt>{r}</dt>
-              <dd class="card__pending">[POR DEFINIR]</dd>
+              <dt>{r.label}</dt>
+              {r.value ? <dd>{r.value}</dd> : <dd class="card__pending">[POR DEFINIR]</dd>}
             </div>
           ))}
           <div class="card__row">
             <dt>Cómo reclamar</dt>
-            <dd class="card__pending">WhatsApp {whatsappDisplay}</dd>
+            <dd>WhatsApp {whatsappDisplay}</dd>
           </div>
         </dl>
       </div>

@@ -26,7 +26,6 @@ export const faqItems: FaqItem[] = [
   },
   {
     question: '¿Dan garantía?',
-    answer: 'Sí.',
-    marker: '[DETALLES PENDIENTES]',
+    answer: 'Sí. Los trabajos tienen 3 meses de garantía, salvo desgaste por uso o mal uso.',
   },
 ];
